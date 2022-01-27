@@ -21,11 +21,11 @@ let defaultData = {
 }
 
 const steps = [
-  { id: 'listadd' },
+  
   { id: 'names' },
   { id: 'address' },
   { id: 'contact' },
-  
+  { id: 'listadd' },
   { id: 'review' },
   { id: 'submit' }
 ]

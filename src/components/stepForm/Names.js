@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 export const Names = ({ formData, setForm, navigation }) => {
-  const { firstName, lastName, nickName } = formData;
+  const { firstName, lastName, nickName,addItem } = formData;
 
   return (
     <Container maxWidth="xs">
@@ -64,6 +64,7 @@ export const Names = ({ formData, setForm, navigation }) => {
  <h1> Your Last Name:   {lastName}</h1> 
 
  <h1> Your Nick Name:   {nickName}</h1> 
+ 
 
     </Container>
   );

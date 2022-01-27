@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button'
 import { List, ListItem } from '@material-ui/core'
 
 export const ListAdd = ({ formData, setForm, navigation }) => {
-  const {
+  let {
     firstName,
     lastName,
     nickName,
@@ -36,17 +36,23 @@ export const ListAdd = ({ formData, setForm, navigation }) => {
 
   function handleChange (n) {
     let index = selectItem.indexOf(n.name)
-    console.log(index)
-    if( index === -1){
+
+    if (index === -1) {
       setselectItem(selectItem.concat(n.name))
-    }else{
+    } else {
       setselectItem(selectItem.filter(k => k !== n.name))
     }
- 
   }
-  
 
-  console.log(selectItem)
+  function buttonOnChange (n) {
+    if (selectItem.indexOf(n.name) === -1) {
+      return 'Add'
+    } else {
+      return 'Remove'
+    }
+  }
+ 
+
   return (
     <Container maxWidth='xs'>
       <h3>List Add</h3>
@@ -55,16 +61,15 @@ export const ListAdd = ({ formData, setForm, navigation }) => {
           return (
             <ListItem key={n.name} id='list'>
               <Button
-                color='secondary'
+                color={buttonOnChange(n) === 'Remove' ? 'secondary' : 'primary'}
                 variant='contained'
                 style={{ marginRight: '1rem' }}
                 className='Add'
                 onClick={() => handleChange(n)}
               >
-                Add
+                {buttonOnChange(n)}
               </Button>
               {n.name}
-            
             </ListItem>
           )
         })}
@@ -80,6 +85,21 @@ export const ListAdd = ({ formData, setForm, navigation }) => {
         autoComplete='off'
         fullWidth
       />
+
+      {/* {selectItem.map(k => {
+        return (
+          <TextField
+            label='Add Item'
+            name='addItem'
+            value={k}
+            onChange={setForm}
+            margin='normal'
+            variant='outlined'
+            autoComplete='off'
+            fullWidth
+          />
+        )
+      })} */}
 
       <div style={{ marginTop: '1rem' }}>
         <Button
@@ -98,9 +118,19 @@ export const ListAdd = ({ formData, setForm, navigation }) => {
           Next
         </Button>
       </div>
-      
+      <br />
+      <br />
 
-     
+      <h1> Your First Name: {firstName}</h1>
+      <h1> Your Last Name: {lastName}</h1>
+      <h1> Your Nick Name: {nickName}</h1>
+      <h1> Your Address: {address}</h1>
+      <h1> Your City: {city}</h1>
+      <h1> Your State: {state}</h1>
+      <h1> Your Zip Code: {zip}</h1>
+      <h1> Your Phone Number: {phone}</h1>
+      <h1> Your Email: {email}</h1>
+      <h1> Your Add Item: {addItem}</h1>
     </Container>
   )
 }

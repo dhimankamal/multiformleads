@@ -7,7 +7,7 @@ import { ListAdd } from './stepForm/ListAdd'
 import { Review } from './stepForm/Review'
 import { Submit } from './stepForm/Submit'
 
-const defaultData = {
+let defaultData = {
   firstName: '',
   lastName: '',
   nickName: '',
@@ -17,7 +17,7 @@ const defaultData = {
   zip: '',
   phone: '',
   email: '',
-  addItem: [],
+  addItem: []
 }
 
 const steps = [

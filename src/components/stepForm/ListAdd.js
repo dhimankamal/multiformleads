@@ -1,12 +1,11 @@
-import React,{ useState }  from 'react'
+import React, { useState } from 'react'
 import Container from '@material-ui/core/Container'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { List, ListItem } from '@material-ui/core'
- 
 
 export const ListAdd = ({ formData, setForm, navigation }) => {
-  let {
+  const {
     firstName,
     lastName,
     nickName,
@@ -19,61 +18,69 @@ export const ListAdd = ({ formData, setForm, navigation }) => {
     addItem
   } = formData
 
-let [text, setText] = useState("");
-
-  function handleChange(name) {
-    
-
-    if(text.includes(name)){
-      return text = setText(text.replace(name,""));
-
-    }else{
-      return setText(text + name);
+  const items = [
+    {
+      name: 'Item 1'
+    },
+    {
+      name: 'Item 2'
+    },
+    {
+      name: 'Item 3'
+    },
+    {
+      name: 'Item 4'
     }
-   
+  ]
+  const [selectItem, setselectItem] = useState([])
+
+  function handleChange (n) {
+    let index = selectItem.indexOf(n.name)
+    console.log(index)
+    if( index === -1){
+      setselectItem(selectItem.concat(n.name))
+    }else{
+      setselectItem(selectItem.filter(k => k !== n.name))
+    }
+ 
   }
+  
 
-
+  console.log(selectItem)
   return (
     <Container maxWidth='xs'>
       <h3>List Add</h3>
       <List>
-        <ListItem id='list'>
-          <Button
-            color='secondary'
-            variant='contained'
-            style={{ marginRight: '1rem' }}
-            className='Add' 
-            onClick={() =>  handleChange('Item 1')}
-          >
-
-            Add
-          </Button>
-          Item 1
-        </ListItem>
-        <ListItem id='list'>
-          <Button
-            color='secondary'
-            variant='contained'
-            style={{ marginRight: '1rem' }}
-            className='Add'
-            onClick={() =>  handleChange('Item 2')}
-          >
-            Add
-          </Button>
-          Item 2
-        </ListItem>
+        {items.map(n => {
+          return (
+            <ListItem key={n.name} id='list'>
+              <Button
+                color='secondary'
+                variant='contained'
+                style={{ marginRight: '1rem' }}
+                className='Add'
+                onClick={() => handleChange(n)}
+              >
+                Add
+              </Button>
+              {n.name}
+            
+            </ListItem>
+          )
+        })}
       </List>
+
       <TextField
         label='Add Item'
         name='addItem'
-        value={text}
+        value={selectItem}
         onChange={setForm}
         margin='normal'
         variant='outlined'
         autoComplete='off'
         fullWidth
       />
+
       <div style={{ marginTop: '1rem' }}>
         <Button
           color='secondary'
@@ -91,19 +98,9 @@ let [text, setText] = useState("");
           Next
         </Button>
       </div>
-      <br />
-      <br />
+      
 
-      <h1> Your First Name: {firstName}</h1>
-      <h1> Your Last Name: {lastName}</h1>
-      <h1> Your Nick Name: {nickName}</h1>
-      <h1> Your Address: {address}</h1>
-      <h1> Your City: {city}</h1>
-      <h1> Your State: {state}</h1>
-      <h1> Your Zip Code: {zip}</h1>
-      <h1> Your Phone Number: {phone}</h1>
-      <h1> Your Email: {email}</h1>
-      <h1> Your Item: {text}</h1>
+     
     </Container>
   )
 }
